@@ -8,7 +8,7 @@
  * without it — results just won't be saved anywhere).
  */
 const QUIZ_CONFIG = {
-  SUBMIT_URL: ""
+  SUBMIT_URL: "https://script.google.com/macros/s/AKfycbywCbRNnZCaHbyVci9Jt8k2I51OIo7zFleAFK44bgR4Wq416kCaIUTANtlSgbPfJUJhUw/exec"
 };
 
 if (typeof window !== "undefined") {
