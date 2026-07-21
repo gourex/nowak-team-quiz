@@ -1,15 +1,18 @@
 (function () {
-  const ICONS = window.NOWAK_ICONS || {};
+  const ILLUSTRATIONS = window.QUIZ_ILLUSTRATIONS || {};
   const DATA = window.QUIZ_DATA;
 
+  const CALCULATING_DELAY_MS = 1400;
+
   function iconSvg(name) {
-    const path = ICONS[name] || "";
-    return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+    const markup = ILLUSTRATIONS[name] || "";
+    return `<svg viewBox="0 0 48 48">${markup}</svg>`;
   }
 
   const screens = {
     start: document.getElementById("screen-start"),
     question: document.getElementById("screen-question"),
+    calculating: document.getElementById("screen-calculating"),
     result: document.getElementById("screen-result")
   };
 
@@ -76,8 +79,14 @@
       currentIndex += 1;
       renderQuestion();
     } else {
-      showResult();
+      showCalculating();
     }
+  }
+
+  function showCalculating() {
+    setProgress(100);
+    showScreen("calculating");
+    setTimeout(showResult, CALCULATING_DELAY_MS);
   }
 
   function computeResultPersona() {
@@ -102,7 +111,6 @@
   }
 
   function showResult() {
-    setProgress(100);
     const key = computeResultPersona();
     const persona = DATA.personas[key];
 

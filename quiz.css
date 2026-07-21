@@ -118,22 +118,21 @@ main {
 .persona-row {
   display: flex;
   justify-content: center;
-  gap: 14px;
+  gap: 10px;
   flex-wrap: wrap;
   margin-bottom: 30px;
 }
 .persona-badge {
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background: var(--bg-light);
+  background: var(--main-blue);
   border: 2px solid var(--yellow);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--dark-blue);
 }
-.persona-badge svg { width: 24px; height: 24px; }
+.persona-badge svg { width: 26px; height: 26px; }
 
 .btn {
   display: block;
@@ -196,7 +195,40 @@ main {
   background: #eaf4fa;
 }
 
+/* CALCULATING SCREEN --------------------------------------------------------- */
+.spinner-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 60px 0 22px;
+}
+.spinner {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 6px solid var(--bg-light);
+  border-top-color: var(--main-blue);
+  border-right-color: var(--yellow);
+  animation: spin 0.9s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.calculating-text {
+  text-align: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark-blue);
+}
+
 /* RESULT SCREEN ------------------------------------------------------------ */
+#screen-result.active {
+  animation: resultReveal 0.45s ease;
+}
+@keyframes resultReveal {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
 .result-icon {
   width: 96px;
   height: 96px;
@@ -206,10 +238,9 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--white);
   margin: 0 auto 18px;
 }
-.result-icon svg { width: 46px; height: 46px; }
+.result-icon svg { width: 52px; height: 52px; }
 
 .result-kicker {
   text-align: center;
