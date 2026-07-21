@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which Pop-Culture Personality Are You? — The Nowak Insider</title>
+<link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+  <div class="wrap">
+    <header class="quiz-header">
+      <img src="assets/logos/nowak-logo-white.png" alt="Nowak Dental Supplies">
+      <div class="kicker">Team Engagement</div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    </header>
+
+    <main>
+      <section class="screen active" id="screen-start">
+        <h1 class="start-title" id="startTitle"></h1>
+        <p class="start-sub" id="startSub"></p>
+        <div class="persona-row" id="personaRow"></div>
+        <button class="btn" id="startBtn">Start Quiz</button>
+      </section>
+
+      <section class="screen" id="screen-question">
+        <div class="question-count" id="questionCount"></div>
+        <h2 class="question-prompt" id="questionPrompt"></h2>
+        <div class="options" id="optionsList"></div>
+      </section>
+
+      <section class="screen" id="screen-result">
+        <div class="result-icon" id="resultIcon"></div>
+        <div class="result-kicker">You are...</div>
+        <h2 class="result-title" id="resultTitle"></h2>
+        <p class="result-tagline" id="resultTagline"></p>
+        <p class="result-description" id="resultDescription"></p>
+        <div class="result-actions">
+          <button class="btn" id="copyBtn">Copy My Result to Share</button>
+          <button class="btn btn-secondary" id="retakeBtn">Take Again</button>
+        </div>
+        <div class="copy-feedback" id="copyFeedback"></div>
+      </section>
+    </main>
+
+    <footer class="quiz-footer">
+      <strong>Better smiles. Together.</strong><br>
+      Nowak Dental Supplies
+    </footer>
+  </div>
+
+  <script src="assets/icons/icon-set.js"></script>
+  <script src="quiz-data.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>
