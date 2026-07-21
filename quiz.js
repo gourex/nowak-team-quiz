@@ -1,12 +1,14 @@
 (function () {
-  const ILLUSTRATIONS = window.QUIZ_ILLUSTRATIONS || {};
   const DATA = window.QUIZ_DATA;
 
   const CALCULATING_DELAY_MS = 1400;
 
-  function iconSvg(name) {
-    const markup = ILLUSTRATIONS[name] || "";
-    return `<svg viewBox="0 0 48 48">${markup}</svg>`;
+  function illustrationImg(name, alt) {
+    const img = document.createElement("img");
+    img.src = `assets/illustrations/${name}.png`;
+    img.alt = alt || "";
+    img.loading = "lazy";
+    return img;
   }
 
   const screens = {
@@ -34,9 +36,10 @@
 
   const personaRow = document.getElementById("personaRow");
   DATA.personaOrder.forEach((key) => {
+    const persona = DATA.personas[key];
     const badge = document.createElement("div");
     badge.className = "persona-badge";
-    badge.innerHTML = iconSvg(DATA.personas[key].icon);
+    badge.appendChild(illustrationImg(persona.icon, persona.title));
     personaRow.appendChild(badge);
   });
 
@@ -144,7 +147,9 @@
     const key = computeResultPersona();
     const persona = DATA.personas[key];
 
-    document.getElementById("resultIcon").innerHTML = iconSvg(persona.icon);
+    const resultIcon = document.getElementById("resultIcon");
+    resultIcon.innerHTML = "";
+    resultIcon.appendChild(illustrationImg(persona.icon, persona.title));
     document.getElementById("resultTitle").textContent = persona.title;
     document.getElementById("resultTagline").textContent = persona.tagline;
     document.getElementById("resultDescription").textContent = persona.description;
