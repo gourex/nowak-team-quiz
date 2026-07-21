@@ -19,6 +19,9 @@
         <h1 class="start-title" id="startTitle"></h1>
         <p class="start-sub" id="startSub"></p>
         <div class="persona-row" id="personaRow"></div>
+        <label class="nickname-label" for="nicknameInput">What should we call you?</label>
+        <input class="nickname-input" id="nicknameInput" type="text" placeholder="Enter your name or nickname" maxlength="40" autocomplete="off">
+        <p class="nickname-error" id="nicknameError">Type a name or nickname to start.</p>
         <button class="btn" id="startBtn">Start Quiz</button>
       </section>
 
@@ -57,6 +60,7 @@
 
   <script src="assets/icons/illustrations.js"></script>
   <script src="quiz-data.js"></script>
+  <script src="quiz-config.js"></script>
   <script src="quiz.js"></script>
 </body>
 </html>

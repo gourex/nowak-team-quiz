@@ -43,8 +43,20 @@
   // ---- Quiz state ----------------------------------------------------------
   let currentIndex = -1;
   let answers = [];
+  let nickname = "";
+
+  const nicknameInput = document.getElementById("nicknameInput");
+  const nicknameError = document.getElementById("nicknameError");
 
   function startQuiz() {
+    const value = nicknameInput.value.trim();
+    if (!value) {
+      nicknameError.classList.add("visible");
+      nicknameInput.focus();
+      return;
+    }
+    nickname = value;
+    nicknameError.classList.remove("visible");
     answers = [];
     currentIndex = 0;
     renderQuestion();
@@ -86,7 +98,25 @@
   function showCalculating() {
     setProgress(100);
     showScreen("calculating");
+    submitResult(computeResultPersona());
     setTimeout(showResult, CALCULATING_DELAY_MS);
+  }
+
+  function submitResult(personaKey) {
+    const url = window.QUIZ_CONFIG && window.QUIZ_CONFIG.SUBMIT_URL;
+    if (!url) return;
+    try {
+      fetch(url, {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+          nickname: nickname,
+          persona: DATA.personas[personaKey].title
+        })
+      });
+    } catch (e) {
+      // Recording is best-effort; never block the quiz on a network issue.
+    }
   }
 
   function computeResultPersona() {
@@ -126,7 +156,7 @@
   function copyResult() {
     const key = computeResultPersona();
     const persona = DATA.personas[key];
-    const text = `I got "${persona.title}" on the Nowak team quiz! ${persona.tagline}`;
+    const text = `${nickname} got "${persona.title}" on the Nowak team quiz! ${persona.tagline}`;
     const feedback = document.getElementById("copyFeedback");
 
     const done = () => {
@@ -145,8 +175,13 @@
   }
 
   document.getElementById("startBtn").addEventListener("click", startQuiz);
+  nicknameInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") startQuiz();
+  });
   document.getElementById("retakeBtn").addEventListener("click", () => {
     setProgress(0);
+    nicknameInput.value = "";
+    nicknameError.classList.remove("visible");
     showScreen("start");
   });
   document.getElementById("copyBtn").addEventListener("click", copyResult);
